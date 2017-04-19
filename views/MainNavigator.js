@@ -11,6 +11,7 @@ import { StackNavigator } from 'react-navigation';
 
 import HomeScreenTabNavigator from './HomeScreenTabNavigator';
 import ChatScreen from './chat/ChatScreen';
+import DemoScreen from './demo';
 
 /**
  * Top-level navigator. Renders the application UI.
@@ -22,6 +23,9 @@ const MainNavigator = StackNavigator({
   Chat: {
     screen: ChatScreen,
   },
+  Demo: {
+    screen: DemoScreen
+  }
 });
 
 export default MainNavigator;

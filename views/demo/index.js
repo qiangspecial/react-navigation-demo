@@ -7,13 +7,14 @@ import {
     Platform,
     Image
 } from 'react-native';
+import styles from './style'
 import CommonHeader from './common/head'
 
 export default class App extends Component {
     static navigationOptions = {
-        title: 'Chats',
+        title: 'demo',
         header: {
-        visible: Platform.OS === 'ios',
+            visible: Platform.OS === 'ios',
         },
         tabBar: {
         icon: ({ tintColor }) => (
@@ -111,109 +112,81 @@ class ChangDI extends Component {
 				}
 			])
 		};
+
+        this.renderRow = this.renderRow.bind(this)
+        this.renderHeader = this.renderHeader.bind(this)
 	}
+
+    renderRow(rowData) {
+        return (
+            <View style={styles.cdLIst}>
+                <View style={[styles.cdLIstText,{flex:3,justifyContent:'flex-start',flexDirection:'row'}]}>
+                    <Text style={{color:'#3883ca'}}>
+                        &#xe608;
+                    </Text>
+                    <Text>
+                        {rowData.cdmc}
+                    </Text>
+                </View>
+                <View style={[styles.cdLIstText,{flex:1}]}>
+                    <Text>
+                        {rowData.cdje}
+                    </Text>
+                </View>
+                <View style={[styles.cdLIstText,{flex:1}]}>
+                    <Text>
+                        {rowData.cddd}
+                    </Text>
+                </View>
+                <View style={[styles.cdLIstText,{flex:1}]}>
+                    <Text>
+                        {rowData.cdrc}
+                    </Text>
+                </View>
+            </View>
+        )
+    }
+
+    renderHeader() {
+        return (
+            <View style={styles.cdLIst}>
+                <View style={[styles.cdLIstText,{flex:3,height:30,alignItems:'flex-start'}]}>
+                    <Text style={{fontSize:12,paddingLeft:12}}>
+                        场地名称
+                    </Text>
+                </View>
+                <View style={[styles.cdLIstText,{flex:1,height:30}]}>
+                    <Text style={{fontSize:12}}>
+                        金额
+                    </Text>
+                </View>
+                <View style={[styles.cdLIstText,{flex:1,height:30}]}>
+                    <Text style={{fontSize:12}}>
+                        订单数
+                    </Text>
+                </View>
+                <View style={[styles.cdLIstText,{flex:1,height:30}]}>
+                    <Text style={{fontSize:12}}>
+                        人次
+                    </Text>
+                </View>
+            </View>
+        )
+    }
+
 	render (){
 		return (
 			<View>
 				<View style={styles.changdiTitle}>
-					<Text style={{color:"#3883ca",paddingLeft:5,paddingRight:5}}>&#xe68a;</Text>
+					<Text style={{color:"#3883ca",paddingHorizontal: 5}}>&#xe68a;</Text>
 					<Text style={{fontSize:16,color:'#222'}}>场地概况</Text>
 				</View>
-				<View>
-
-					<ListView
-						dataSource={this.state.dataSource}
-						renderRow={(rowData) => (
-							<View style={styles.cdLIst}>
-								<View style={[styles.cdLIstText,{flex:3,justifyContent:'flex-start',flexDirection:'row'}]}>
-									<Text style={{color:'#3883ca'}}>
-										&#xe608;
-									</Text>
-									<Text>
-										{rowData.cdmc}
-									</Text>
-								</View>
-								<View style={[styles.cdLIstText,{flex:1}]}>
-									<Text>
-										{rowData.cdje}
-									</Text>
-								</View>
-								<View style={[styles.cdLIstText,{flex:1}]}>
-									<Text>
-										{rowData.cddd}
-									</Text>
-								</View>
-								<View style={[styles.cdLIstText,{flex:1}]}>
-									<Text>
-										{rowData.cdrc}
-									</Text>
-								</View>
-							</View>
-						)}
-						renderHeader = {()=>(
-							<View style={styles.cdLIst}>
-								<View style={[styles.cdLIstText,{flex:3,height:30,alignItems:'flex-start'}]}>
-									<Text style={{fontSize:12,paddingLeft:12}}>
-										场地名称
-									</Text>
-								</View>
-								<View style={[styles.cdLIstText,{flex:1,height:30}]}>
-									<Text style={{fontSize:12}}>
-										金额
-									</Text>
-								</View>
-								<View style={[styles.cdLIstText,{flex:1,height:30}]}>
-									<Text style={{fontSize:12}}>
-										订单数
-									</Text>
-								</View>
-								<View style={[styles.cdLIstText,{flex:1,height:30}]}>
-									<Text style={{fontSize:12}}>
-										人次
-									</Text>
-								</View>
-							</View>
-						)}
-					/>
-				</View>
+                <ListView
+                    dataSource={this.state.dataSource}
+                    renderRow={this.renderRow}
+                    renderHeader = {this.renderHeader}
+                />
 			</View>
 		)
 	}
 }
-const styles = StyleSheet.create({
-	indexBanner:{
-		height:173,
-		backgroundColor:"#3883ca"
-	},
-	totalTitle:{
-		alignSelf:"center",
-		height:50,
-		justifyContent:'center'
-	},
-	halfBox:{
-		flex:1
-	},
-	totalTile1:{
-		height:30
-	},
-	changdiTitle:{
-		height:40,
-		alignItems:"center",
-		borderBottomWidth:1,
-		borderColor:"#ccc",
-		flexDirection:"row"
-	},
-	cdLIst:{
-		flexDirection:'row',
-	},
-	cdLIstText:{
-		justifyContent:'center',
-		height:40,
-		alignItems:"center"
-	},
-    icon: {
-        width: 30,
-        height: 26,
-    },
-});
-
